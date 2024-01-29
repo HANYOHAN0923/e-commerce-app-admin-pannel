@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:web_admin_page/views/screens/side_bar_screens/widgets/banner_widget.dart';
 
 class UploadBannerScreen extends StatefulWidget {
   static const String routeName = '\UploadScreen';
@@ -57,85 +58,107 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.topLeft,
-          padding: const EdgeInsets.all(10),
-          child: const Text(
-            'Banners',
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 36,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+              'Banners',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 36,
+              ),
             ),
           ),
-        ),
-        const Divider(
-          color: Colors.grey,
-        ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Column(
-                children: [
-                  Container(
-                    height: 140,
-                    width: 140,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      border: Border.all(
-                        color: Colors.grey.shade500,
+          const Divider(
+            color: Colors.grey,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 140,
+                      width: 140,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        border: Border.all(
+                          color: Colors.grey.shade500,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: _image != null
-                        ? Image.memory(
-                            _image,
-                            fit: BoxFit.cover,
-                          )
-                        : const Center(
-                            child: Text(
-                              "Banners",
+                      child: _image != null
+                          ? Image.memory(
+                              _image,
+                              fit: BoxFit.cover,
+                            )
+                          : const Center(
+                              child: Text(
+                                "Banners",
+                              ),
                             ),
-                          ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.yellow.shade900,
                     ),
-                    onPressed: () {
-                      pickImage();
-                    },
-                    child: Text(
-                      'Upload Image',
-                      style: TextStyle(color: Colors.white),
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                ],
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow.shade900,
+                      ),
+                      onPressed: () {
+                        pickImage();
+                      },
+                      child: Text(
+                        'Upload Image',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.yellow.shade900,
+              SizedBox(
+                width: 30,
               ),
-              onPressed: () {
-                uploadToFireStore();
-              },
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.yellow.shade900,
+                ),
+                onPressed: () {
+                  uploadToFireStore();
+                },
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Divider(
+              color: Colors.grey,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.topLeft,
               child: Text(
-                'Save',
-                style: TextStyle(color: Colors.white),
+                "Banners ",
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ],
-        ),
-      ],
+          ),
+          BannerWidget(),
+        ],
+      ),
     );
   }
 }
